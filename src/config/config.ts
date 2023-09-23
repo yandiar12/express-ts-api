@@ -9,3 +9,4 @@ export const db_name = String(process.env.DB_NAME);
 export const db_user = String(process.env.DB_USER);
 export const db_password = String(process.env.DB_PASSWORD);
 export const jwt_secret = String('TongBejaBejaKaBatur');
+export const user_role = ['USER', 'ADMIN'];

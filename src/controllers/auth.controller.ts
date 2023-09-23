@@ -43,7 +43,7 @@ const signin = async (req: Request, res: Response) => {
 }
 
 const signup = async (req: Request, res: Response) => {
-    const { name, email, password, country, roles } = req.body;
+    const { name, email, password, address, phoneNumber, noidentity, roles } = req.body;
     try {
         const userExists = await User.findOne({
             where: {
@@ -61,7 +61,9 @@ const signup = async (req: Request, res: Response) => {
             name,
             email,
             password: hashedPassword,
-            country
+            phoneNumber,
+            address,
+            noidentity
         }) as any;
 
         if (roles) {

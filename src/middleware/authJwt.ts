@@ -7,7 +7,7 @@ export interface CustomRequest extends Request {
 }
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const token = req.header('x-secret-key');
+    const token = req.header('x-access-token');
 
     if (!token) {
         return res.status(401).send({ status: 'Unauthorized', message: 'Authentication is required.' });
@@ -16,7 +16,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     try {
         const decoded = jwt.verify(token, jwt_secret);
         (req as CustomRequest).token = decoded;
-        
+
         next();
     } catch (err) {
         console.log(err);

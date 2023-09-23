@@ -7,7 +7,9 @@ export default class User extends Model {
     public name!: string;
     public email!: string;
     public password!: string;
-    public country?: string;
+    public phoneNumber!: string;
+    public address?: string;
+    public noidentity?: string;
 }
 
 User.init({
@@ -25,7 +27,15 @@ User.init({
     password: {
         type: DataTypes.STRING(100),
     },
-    country: {
+    phoneNumber: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    address: {
+        type: DataTypes.STRING(100),
+        allowNull: true
+    },
+    noidentity: {
         type: DataTypes.STRING(100),
         allowNull: true
     }

@@ -45,7 +45,9 @@ const createUser = async (req: Request, res: Response) => {
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
-            country: req.body.country
+            address: req.body.address,
+            phoneNumber: req.body.phoneNumber,
+            noidentity: req.body.noidentity
         };
 
         const user = await User.create(newUser);

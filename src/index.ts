@@ -21,7 +21,7 @@ app.use('/auth', authRoutes);
 
 app.listen(port, async () => {
     try {
-        await sequelize.sync(); // Sinkronkan tabel sebelum menjalankan server
+        await sequelize.sync(); // Synchronize tables before running the server
         console.log(`App listening on port ${port}`);
     } catch (error) {
         console.error('Gagal menjalankan server:', error);
