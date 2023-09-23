@@ -3,6 +3,8 @@ import User from '../models/user.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { jwt_secret } from '../config/config';
+import Role from '../models/role.model';
+import { Op } from 'sequelize';
 
 const signin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -41,10 +43,11 @@ const signin = async (req: Request, res: Response) => {
 }
 
 const signup = async (req: Request, res: Response) => {
+    const { name, email, password, country, roles } = req.body;
     try {
         const userExists = await User.findOne({
             where: {
-                email: req.body.email
+                email: email
             }
         });
 
@@ -53,14 +56,27 @@ const signup = async (req: Request, res: Response) => {
         }
 
         // create user
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const newUser = {
-            name: req.body.name,
-            email: req.body.email,
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await User.create({
+            name,
+            email,
             password: hashedPassword,
-            country: req.body.country
+            country
+        }) as any;
+
+        if (roles) {
+            const foundRoles = await Role.findAll({
+                where: {
+                    name: {
+                        [Op.or]: roles
+                    }
+                }
+            });
+
+            await user.setRoles(foundRoles);
+        } else {
+            await user.setRoles([1]);
         }
-        const user = await User.create(newUser);
 
         res.status(200).send({
             status: 'OK',
@@ -70,7 +86,7 @@ const signup = async (req: Request, res: Response) => {
         console.log(err);
         res.status(500).send({
             status: 'INTERNAL_SERVER_ERROR',
-            message: 'Error Sign In'
+            message: 'Error Sign Up'
         })
     }
 }

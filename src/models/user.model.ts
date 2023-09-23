@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/database';
+import Role from '../models/role.model';
 
 export default class User extends Model {
     public id?: number;
@@ -33,3 +34,6 @@ User.init({
     tableName: 'users',
     timestamps: true
 });
+
+User.belongsToMany(Role, { through: 'UserRole' });
+Role.belongsToMany(User, { through: 'UserRole' });
