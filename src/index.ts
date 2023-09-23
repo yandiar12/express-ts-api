@@ -5,6 +5,7 @@ import { port } from './config/config';
 import sequelize from './config/database';
 import usersRoutes from './routes/users.routes';
 import authRoutes from './routes/auth.routes';
+import driverRoutes from './routes/driver.routes';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get('/', async (req: Request, res: Response) => {
 
 app.use('/users', usersRoutes);
 app.use('/auth', authRoutes);
+app.use('/driver', driverRoutes);
 
 app.listen(port, async () => {
     try {
