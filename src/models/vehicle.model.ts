@@ -4,7 +4,7 @@ import sequelize from '../config/database';
 export default class Vehicle extends Model {
     public id?: number;
     public vehicleName!: string;
-    public licensePlate!: string;
+    public licensePlateNumber!: string;
     public capacity!: number;
 }
 
@@ -17,7 +17,7 @@ Vehicle.init({
     vehicleName: {
         type: DataTypes.STRING(255)
     },
-    licensePlate: {
+    licensePlateNumber: {
         type: DataTypes.STRING(100)
     },
     capacity: {
