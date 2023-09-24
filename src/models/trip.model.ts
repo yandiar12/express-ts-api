@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/database';
+import Vehicle from './vehicle.model';
 
 export default class Trip extends Model {
     public id?: number;
@@ -41,3 +42,5 @@ Trip.init({
     tableName: 'trips',
     timestamps: true
 });
+
+Trip.belongsTo(Vehicle, { foreignKey: 'vehicleId' });
