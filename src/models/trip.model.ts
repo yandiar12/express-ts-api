@@ -9,6 +9,8 @@ export default class Trip extends Model {
     public departureTime!: string;
     public departureDate!: Date;
     public cost!: number;
+    public capacity!: number;
+    public statusBook!: string;
     public vehicleId!: number;
     public userId!: number;
 }
@@ -26,10 +28,20 @@ Trip.init({
         type: DataTypes.STRING(255)
     },
     departureTime: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING(20)
     },
     departureDate: {
         type: DataTypes.DATE,
+    },
+    cost: {
+        type: DataTypes.DOUBLE
+    },
+    capacity: {
+        type: DataTypes.INTEGER
+    },
+    statusBook: {
+        type: DataTypes.STRING(255),
+        defaultValue: 'AVAILABLE'
     },
     vehicleId: {
         type: DataTypes.INTEGER

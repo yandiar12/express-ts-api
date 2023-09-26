@@ -41,7 +41,8 @@ const findTripByFilter = async (req: Request, res: Response) => {
             where: {
                 origin: origin,
                 destination: destination,
-                departureDate: date                
+                departureDate: date,
+                statusBook: 'AVAILABLE'
             }
         })
 

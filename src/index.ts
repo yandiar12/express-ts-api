@@ -30,7 +30,7 @@ app.use('/booking', bookingRouters);
 
 app.listen(port, async () => {
     try {
-        await sequelize.sync(); // Synchronize tables before running the server
+        await sequelize.sync({ alter: true }); // Synchronize tables before running the server
         console.log(`App listening on port ${port}`);
     } catch (error) {
         console.error('Gagal menjalankan server:', error);
