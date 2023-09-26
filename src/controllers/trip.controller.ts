@@ -34,10 +34,28 @@ const createTrip = async (req: Request, res: Response) => {
 
 }
 
-const getTripByFilter = async (req: Request, res: Response) => {
+const findTripByFilter = async (req: Request, res: Response) => {
+    const { origin, destination, date, passenger } = req.body;
+    try {
+        const trips = await Trip.findAll({
+            where: {
+                origin: origin,
+                destination: destination,
+                departureDate: date                
+            }
+        })
 
+        res.status(200).send({ status: 'OK', data: trips });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({
+            status: 'INTERNAL_SERVER_ERROR',
+            message: 'Error get data'
+        });
+    }
 }
 
 export default {
-    createTrip
+    createTrip,
+    findTripByFilter
 }
