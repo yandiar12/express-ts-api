@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.routes';
 import driverRoutes from './routes/driver.routes';
 import vehicleRoutes from './routes/vehicle.routes';
 import tripRouters from './routes/trip.routes';
+import bookingRouters from './routes/booking.routes';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/auth', authRoutes);
 app.use('/driver', driverRoutes);
 app.use('/vehicle', vehicleRoutes);
 app.use('/trip', tripRouters);
+app.use('/booking', bookingRouters);
 
 app.listen(port, async () => {
     try {
